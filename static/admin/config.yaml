@@ -1,0 +1,32 @@
+backend:
+  name: github
+  repo: MartinSchere/personal-blog
+  branch: master
+
+media_folder: static/assets
+public_folder: /assets
+
+collections:
+  - name: blog
+    label: Blog
+    folder: blog
+    slug: "index"
+    media_folder: ""
+    public_folder: ""
+    path: "{{title}}/index"
+    create: true
+    fields:
+      - { name: thumbnail, label: Thumbnail, widget: image }
+      - { name: featuredImage, label: Featured Image, widget: image }
+      - { name: date, label: Date, widget: datetime }
+      - { name: title, label: Title }
+      - { name: description, label: Description }
+      - { name: category, label: Description }
+      - { name: body, label: Body, widget: markdown }
+
+  - name: categories
+    label: Categories
+    folder: categories
+    create: true
+    fields:
+      - { name: name, label: Name of the category, widget: string }

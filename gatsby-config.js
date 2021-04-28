@@ -6,18 +6,32 @@ module.exports = {
       summary: `who loves remote work, programming and powerlifting`,
     },
     description: `This is where I share information, experiences and a lot more of cool stuff.`,
-    siteUrl: `https://personalblog25258.gtsb.io`,
+    siteUrl: `https://mschere.netlify.app`,
     social: {
       twitter: `scheredev`,
     },
   },
   plugins: [
     `gatsby-plugin-image`,
+    `gatsby-plugin-netlify-cms`,
+    {
+      resolve: "gatsby-plugin-sass",
+      options: {
+        additionalData: `@import "${__dirname}/src/scss/main";`,
+      },
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         path: `${__dirname}/content/blog`,
         name: `blog`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/content/categories`,
+        name: `categories`,
       },
     },
     {
@@ -112,10 +126,10 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Gatsby Starter Blog`,
-        short_name: `GatsbyJS`,
+        name: `The Schere Blog`,
+        short_name: `SchereBlog`,
         start_url: `/`,
-        background_color: `#ffffff`,
+        background_color: `#fffdfd`,
         theme_color: `#663399`,
         display: `minimal-ui`,
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
@@ -123,8 +137,6 @@ module.exports = {
     },
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-gatsby-cloud`,
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
+    `gatsby-plugin-offline`,
   ],
 }

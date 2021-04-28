@@ -30,7 +30,7 @@ const Layout = ({ location, title, children }: LayoutProps) => {
   }
 
   return (
-    <div className="global-wrapper" data-is-root-path={isRootPath}>
+    <div className="container" data-is-root-path={isRootPath}>
       <header className="global-header">{header}</header>
       <main>{children}</main>
       <footer>

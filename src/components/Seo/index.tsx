@@ -3,19 +3,18 @@ import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 
 type Meta = {
-  name:string,
-  content:any,
-
+  name: string
+  content: any
 }
 
 type SEOProps = {
-  description?:string;
-  lang?:string;
-  meta?: Meta[];
-  title?:string;
+  description?: string
+  lang?: string
+  meta?: Meta[]
+  title?: string
 }
 
-const Seo = ({ description, lang, meta, title }:SEOProps) => {
+const Seo = ({ description, lang = "en", meta = [], title }: SEOProps) => {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -34,6 +33,8 @@ const Seo = ({ description, lang, meta, title }:SEOProps) => {
 
   const metaDescription = description || site.siteMetadata.description
   const defaultTitle = site.siteMetadata?.title
+
+  console.log(metaDescription, lang, meta, title)
 
   return (
     <Helmet
@@ -79,6 +80,5 @@ const Seo = ({ description, lang, meta, title }:SEOProps) => {
     />
   )
 }
-
 
 export default Seo

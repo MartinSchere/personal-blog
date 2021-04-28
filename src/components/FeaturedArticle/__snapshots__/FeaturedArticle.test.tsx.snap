@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FeaturedArticle renders without error 1`] = `
+<div>
+  FeaturedArticle
+</div>
+`;

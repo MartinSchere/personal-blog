@@ -18,6 +18,7 @@ export type Post = {
     title: string
     date: string
     description: string
+    category: string
   }
   excerpt: string
   fields: {

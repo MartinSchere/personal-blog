@@ -4,6 +4,7 @@ import { Link, graphql, PageProps } from "gatsby"
 import Bio from "../components/Bio"
 import Layout from "../components/Layout"
 import Seo from "../components/Seo"
+
 import { Post } from "../types"
 
 type DataProps = {
