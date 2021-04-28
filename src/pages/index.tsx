@@ -1,13 +1,25 @@
 import * as React from "react"
-import { Link, graphql } from "gatsby"
+import { Link, graphql, PageProps } from "gatsby"
 
-import Bio from "../components/bio"
-import Layout from "../components/layout"
-import Seo from "../components/seo"
+import Bio from "../components/Bio"
+import Layout from "../components/Layout"
+import Seo from "../components/Seo"
+import { Post } from "../types"
 
-const BlogIndex = ({ data, location }) => {
+type DataProps = {
+  site: {
+    siteMetadata: {
+      title?: string
+    }
+  }
+  allMarkdownRemark: {
+    nodes: any
+  }
+}
+
+const BlogIndex: React.FC<PageProps<DataProps>> = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
-  const posts = data.allMarkdownRemark.nodes
+  const posts: Post[] = data.allMarkdownRemark.nodes
 
   if (posts.length === 0) {
     return (
