@@ -36,4 +36,4 @@ collections:
     folder: categories
     create: true
     fields:
-      - { name: name, label: Name of the category, widget: string }
+      - { name: cat_name, label: Name of the category, widget: string }

@@ -1,3 +1,3 @@
 ---
-name: "Blockchain"
+cat_name: "Blockchain"
 ---
