@@ -1,11 +1,15 @@
 import * as React from "react"
 import { Link, graphql, PageProps } from "gatsby"
 
+import "./index.scss"
+
 import Bio from "../components/Bio"
 import Layout from "../components/Layout"
 import Seo from "../components/Seo"
 
 import { Post } from "../types"
+import Searchbar from "../components/Searchbar"
+import FeaturedArticle from "../components/FeaturedArticle"
 
 type DataProps = {
   site: {
@@ -14,64 +18,33 @@ type DataProps = {
     }
   }
   allMarkdownRemark: {
-    nodes: any
+    group: {
+      nodes: Post[]
+      fieldValue: "true" | "false"
+    }[]
   }
 }
 
 const BlogIndex: React.FC<PageProps<DataProps>> = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
-  const posts: Post[] = data.allMarkdownRemark.nodes
-
-  if (posts.length === 0) {
-    return (
-      <Layout location={location} title={siteTitle}>
-        <Seo title="All posts" />
-        <Bio />
-        <p>
-          No blog posts found. Add markdown posts to "content/blog" (or the
-          directory you specified for the "gatsby-source-filesystem" plugin in
-          gatsby-config.js).
-        </p>
-      </Layout>
-    )
-  }
-
+  const featuredPosts = data.allMarkdownRemark.group.find(
+    p => p.fieldValue === "true"
+  )
   return (
     <Layout location={location} title={siteTitle}>
       <Seo title="All posts" />
-      <Bio />
-      <ol style={{ listStyle: `none` }}>
-        {posts.map(post => {
-          const title = post.frontmatter.title || post.fields.slug
+      <Searchbar />
 
+      <h5 className="title">Latest articles</h5>
+      <ul style={{ listStyle: `none`, paddingInline: 0 }}>
+        {featuredPosts.nodes.map(post => {
           return (
             <li key={post.fields.slug}>
-              <article
-                className="post-list-item"
-                itemScope
-                itemType="http://schema.org/Article"
-              >
-                <header>
-                  <h2>
-                    <Link to={post.fields.slug} itemProp="url">
-                      <span itemProp="headline">{title}</span>
-                    </Link>
-                  </h2>
-                  <small>{post.frontmatter.date}</small>
-                </header>
-                <section>
-                  <p
-                    dangerouslySetInnerHTML={{
-                      __html: post.frontmatter.description || post.excerpt,
-                    }}
-                    itemProp="description"
-                  />
-                </section>
-              </article>
+              <FeaturedArticle post={post} />
             </li>
           )
         })}
-      </ol>
+      </ul>
     </Layout>
   )
 }
@@ -85,17 +58,22 @@ export const pageQuery = graphql`
         title
       }
     }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
-      nodes {
-        excerpt
-        fields {
-          slug
+    allMarkdownRemark {
+      group(field: frontmatter___featured) {
+        nodes {
+          frontmatter {
+            category
+            date
+            description
+            featured
+            title
+          }
+          fields {
+            slug
+          }
+          excerpt
         }
-        frontmatter {
-          date(formatString: "MMMM DD, YYYY")
-          title
-          description
-        }
+        fieldValue
       }
     }
   }

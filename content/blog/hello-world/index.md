@@ -1,7 +1,9 @@
 ---
-title: Hello World
+title: "My journey to learning Python: What it took"
 date: "2015-05-01T22:12:03.284Z"
-description: "Hello World"
+description: "helloworlds"
+category: "hello-world"
+featured: true
 ---
 
 This is my first post on my new fake blog! How exciting!

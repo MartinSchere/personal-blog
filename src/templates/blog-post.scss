@@ -1,0 +1,24 @@
+.post-header {
+  .title-container {
+    border-bottom: $border;
+    padding: 1rem 0;
+  }
+  .share {
+    display: flex;
+    margin-top: 1rem;
+    div {
+      margin-right: 0.75rem;
+      svg {
+        width: 30px;
+        height: 30px;
+      }
+    }
+  }
+}
+.content,
+.post-header {
+  max-width: 650px;
+  @include respond-to("large") {
+    margin: auto;
+  }
+}

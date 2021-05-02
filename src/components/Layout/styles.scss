@@ -1,0 +1,9 @@
+.global-header {
+  display: flex;
+  justify-content: space-between;
+  .main-heading {
+    margin-block: 0;
+    font-weight: 500;
+    padding-top: 0.5rem;
+  }
+}

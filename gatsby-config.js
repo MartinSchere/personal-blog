@@ -12,12 +12,21 @@ module.exports = {
     },
   },
   plugins: [
-    `gatsby-plugin-image`,
-    `gatsby-plugin-netlify-cms`,
+    "gatsby-plugin-netlify-cms",
+
     {
       resolve: "gatsby-plugin-sass",
       options: {
         additionalData: `@import "${__dirname}/src/scss/main";`,
+      },
+    },
+    `gatsby-plugin-image`,
+    {
+      resolve: "gatsby-plugin-react-svg",
+      options: {
+        rule: {
+          include: /assets/, // See below to configure properly
+        },
       },
     },
     {

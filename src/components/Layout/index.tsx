@@ -1,6 +1,9 @@
 import * as React from "react"
 import { Link } from "gatsby"
 
+import "./styles.scss"
+import Sharebutton from "../Sharebutton"
+
 type LayoutProps = {
   location: {
     pathname: string
@@ -17,21 +20,27 @@ const Layout = ({ location, title, children }: LayoutProps) => {
 
   if (isRootPath) {
     header = (
-      <h1 className="main-heading">
+      <h5 className="main-heading">
         <Link to="/">{title}</Link>
-      </h1>
+      </h5>
     )
   } else {
     header = (
-      <Link className="header-link-home" to="/">
-        {title}
-      </Link>
+      <h5 className="main-heading">
+        <Link className="header-link-home" to="/">
+          {title}
+        </Link>
+      </h5>
     )
   }
 
   return (
     <div className="container" data-is-root-path={isRootPath}>
-      <header className="global-header">{header}</header>
+      <header className="global-header">
+        <Sharebutton linkTo="twitter" />
+        {header}
+        <Sharebutton linkTo="share" />
+      </header>
       <main>{children}</main>
       <footer>
         © {new Date().getFullYear()}, Built with

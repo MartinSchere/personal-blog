@@ -3,6 +3,8 @@ import { Link, graphql } from "gatsby"
 import Layout from "../components/Layout"
 import Seo from "../components/Seo"
 import Bio from "../components/Bio"
+import "./blog-post.scss"
+import Sharebutton from "../components/Sharebutton"
 
 const BlogPostTemplate = ({ data, location }) => {
   const post = data.markdownRemark
@@ -20,13 +22,22 @@ const BlogPostTemplate = ({ data, location }) => {
         itemScope
         itemType="http://schema.org/Article"
       >
-        <header>
-          <h1 itemProp="headline">{post.frontmatter.title}</h1>
-          <p>{post.frontmatter.date}</p>
+        <header className="post-header">
+          <div className="title-container">
+            <small className="category-text">{post.frontmatter.category}</small>
+            <h2 itemProp="headline">{post.frontmatter.title}</h2>
+          </div>
+          <div className="share">
+            <Sharebutton linkTo="twitter" />
+            <Sharebutton linkTo="instagram" />
+            <Sharebutton linkTo="facebook" />
+            <Sharebutton linkTo="share" />
+          </div>
         </header>
         <section
           dangerouslySetInnerHTML={{ __html: post.html }}
           itemProp="articleBody"
+          className="content"
         />
         <hr />
         <footer>
@@ -84,6 +95,7 @@ export const pageQuery = graphql`
         title
         date(formatString: "MMMM DD, YYYY")
         description
+        category
       }
     }
     previous: markdownRemark(id: { eq: $previousPostId }) {

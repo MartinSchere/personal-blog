@@ -19,6 +19,7 @@ export type Post = {
     date: string
     description: string
     category: string
+    featured: boolean
   }
   excerpt: string
   fields: {
