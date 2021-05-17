@@ -1,3 +1,4 @@
+const siteUrl = `https://schere.dev`
 module.exports = {
   siteMetadata: {
     title: `schere.dev`,
