@@ -20,9 +20,12 @@ export type Post = {
     description: string
     category: string
     featured: boolean
+    featuredImage: any
+    thumbnail: any
   }
   excerpt: string
   fields: {
     slug: string
   }
+  id: string
 }

@@ -1,7 +1,37 @@
 .title {
-  margin: 0.5rem 0;
-  font-weight: bold;
+  margin: 0.5rem 0 1.5rem;
+  font-weight: 900;
+
+  @include respond-to("medium") {
+    font-size: 1.35rem;
+    margin: 0.5rem 0 2.5rem;
+  }
+}
+.article-image {
+  border-radius: 5px;
+}
+.article-title {
+  font-size: 1.15rem;
+
+  @include respond-to("medium") {
+    font-size: 1.25rem;
+  }
+  @include respond-to("large") {
+    font-size: 1.75rem;
+  }
 }
 .searchbar {
   margin: 2.5rem 0;
+}
+.article-grid {
+  display: grid;
+  gap: 1em;
+  grid-template-columns: repeat(3, 1fr);
+
+  @include respond-to("medium") {
+    grid-template-rows: repeat(2, 1fr);
+    article:first-child {
+      grid-row: 1/3;
+    }
+  }
 }

@@ -1,18 +1,64 @@
 module.exports = {
   siteMetadata: {
-    title: `Schere's blog`,
+    title: `schere.dev`,
     author: {
       name: `Martín Schere`,
       summary: `who loves remote work, programming and powerlifting`,
     },
-    description: `This is where I share information, experiences and a lot more of cool stuff.`,
-    siteUrl: `https://mschere.netlify.app`,
+    description: `My journey tracker: This is where I share information, experiences and a lot more of cool stuff.`,
+    siteUrl: `https://schere.dev`,
     social: {
       twitter: `scheredev`,
     },
   },
   plugins: [
     "gatsby-plugin-netlify-cms",
+    "gatsby-plugin-react-helmet",
+    `gatsby-plugin-image`,
+
+    {
+      resolve: "gatsby-plugin-robots-txt",
+    },
+    {
+      resolve: "gatsby-plugin-sitemap",
+      exclude: ["*/admin/*"],
+      options: {
+        query: `
+        {
+          site {
+            siteMetadata{
+              siteUrl
+            }
+          }
+          allSitePage {
+            nodes{
+              path
+            }
+          }
+        }
+      `,
+        output: "/sitemap.xml",
+        resolveSiteUrl: () => siteUrl,
+        resolvePages: ({ allSitePage: { nodes: allPages } }) => {
+          return allPages.map(page => {
+            return { ...page }
+          })
+        },
+        serialize: ({ site, allSitePage: { nodes: allPages } }) => {
+          return allPages.map(node => {
+            let priority = 0.2
+            if (node.path === "/") {
+              priority = 1
+            }
+            return {
+              url: siteUrl + node.path,
+              changefreq: "monthly",
+              priority,
+            }
+          })
+        },
+      },
+    },
 
     {
       resolve: "gatsby-plugin-sass",
@@ -74,12 +120,20 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
-    // {
-    //   resolve: `gatsby-plugin-google-analytics`,
-    //   options: {
-    //     trackingId: `ADD YOUR TRACKING ID HERE`,
-    //   },
-    // },
+    {
+      resolve: `gatsby-plugin-google-gtag`,
+      options: {
+        // You can add multiple tracking ids and a pageview event will be fired for all of them.
+        trackingIds: [
+          "G-YRVV7JWPQS", // Google Analytics / GA
+        ],
+        // This object is used for configuration specific to this plugin
+        pluginConfig: {
+          // Puts tracking script in the head instead of the body
+          head: true,
+        },
+      },
+    },
     {
       resolve: `gatsby-plugin-feed`,
       options: {

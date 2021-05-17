@@ -36,15 +36,11 @@ const BlogIndex: React.FC<PageProps<DataProps>> = ({ data, location }) => {
       <Searchbar />
 
       <h5 className="title">Latest articles</h5>
-      <ul style={{ listStyle: `none`, paddingInline: 0 }}>
+      <section className="article-grid">
         {featuredPosts.nodes.map(post => {
-          return (
-            <li key={post.fields.slug}>
-              <FeaturedArticle post={post} />
-            </li>
-          )
+          return <FeaturedArticle post={post} key={post.id} />
         })}
-      </ul>
+      </section>
     </Layout>
   )
 }
@@ -67,6 +63,15 @@ export const pageQuery = graphql`
             description
             featured
             title
+            thumbnail {
+              childImageSharp {
+                gatsbyImageData(
+                  width: 300
+                  placeholder: BLURRED
+                  formats: [AUTO, WEBP, AVIF]
+                )
+              }
+            }
           }
           fields {
             slug

@@ -1,7 +1,7 @@
 backend:
   name: git-gateway
   repo: MartinSchere/personal-blog
-  branch: master
+  branch: main
 
 media_folder: static/assets
 public_folder: /assets
@@ -9,7 +9,7 @@ public_folder: /assets
 collections:
   - name: blog
     label: Blog
-    folder: blog
+    folder: content/blog
     slug: "index"
     media_folder: ""
     public_folder: ""
@@ -26,14 +26,14 @@ collections:
           label: Category,
           widget: relation,
           collection: categories,
-          value_field: title,
-          search_fields: ["title"],
+          value_field: cat_name,
+          search_fields: ["cat_name"],
         }
       - { name: body, label: Body, widget: markdown }
 
   - name: categories
     label: Categories
-    folder: categories
+    folder: content/categories
     create: true
     fields:
       - { name: cat_name, label: Name of the category, widget: string }

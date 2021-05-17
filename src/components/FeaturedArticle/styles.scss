@@ -1,0 +1,12 @@
+.post-list-item {
+  h4 {
+    font-weight: 600;
+  }
+  .article-excerpt {
+    display: none;
+
+    @include respond-to("medium") {
+      display: block;
+    }
+  }
+}

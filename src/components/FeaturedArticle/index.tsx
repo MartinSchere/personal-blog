@@ -3,6 +3,7 @@ import "./styles.scss"
 
 import { Post } from "../../types"
 import { Link } from "gatsby"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
 
 type FeaturedArticleProps = {
   post: Post
@@ -10,29 +11,35 @@ type FeaturedArticleProps = {
 
 const FeaturedArticle = ({ post }: FeaturedArticleProps) => {
   const title = post.frontmatter.title || post.fields.slug
+  const image = getImage(post.frontmatter.thumbnail)
   return (
-    <article
-      className="post-list-item"
-      itemScope
-      itemType="http://schema.org/Article"
-    >
-      <header>
-        <h2>
-          <Link to={post.fields.slug} itemProp="url">
-            <span itemProp="headline">{title}</span>
-          </Link>
-        </h2>
-        <small>{post.frontmatter.date}</small>
-      </header>
-      <section>
-        <p
-          dangerouslySetInnerHTML={{
-            __html: post.frontmatter.description || post.excerpt,
-          }}
-          itemProp="description"
+    <Link to={post.fields.slug} itemProp="url">
+      <article
+        className="post-list-item"
+        itemScope
+        itemType="http://schema.org/Article"
+      >
+        <GatsbyImage
+          alt={post.frontmatter.title + "image"}
+          image={image}
+          className="article-image"
         />
-      </section>
-    </article>
+        <header>
+          <small className="category-text">{post.frontmatter.category}</small>
+          <h4 className="article-title">
+            <span itemProp="headline">{title}</span>
+          </h4>
+        </header>
+        <section className="article-excerpt">
+          <p
+            dangerouslySetInnerHTML={{
+              __html: post.frontmatter.description || post.excerpt,
+            }}
+            itemProp="description"
+          />
+        </section>
+      </article>
+    </Link>
   )
 }
 

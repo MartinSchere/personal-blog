@@ -42,11 +42,11 @@ const Layout = ({ location, title, children }: LayoutProps) => {
         <Sharebutton linkTo="share" />
       </header>
       <main>{children}</main>
-      <footer>
+      {/* <footer>
         © {new Date().getFullYear()}, Built with
         {` `}
         <a href="https://www.gatsbyjs.com">Gatsby</a>
-      </footer>
+      </footer> */}
     </div>
   )
 }

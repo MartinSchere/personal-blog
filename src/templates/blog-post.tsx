@@ -5,6 +5,7 @@ import Seo from "../components/Seo"
 import Bio from "../components/Bio"
 import "./blog-post.scss"
 import Sharebutton from "../components/Sharebutton"
+import Img from "gatsby-image"
 
 const BlogPostTemplate = ({ data, location }) => {
   const post = data.markdownRemark
@@ -34,6 +35,14 @@ const BlogPostTemplate = ({ data, location }) => {
             <Sharebutton linkTo="share" />
           </div>
         </header>
+        <div className="featured-image-wrapper">
+          {post.frontmatter.featuredImage && (
+            <Img
+              fluid={post.frontmatter.featuredImage.childImageSharp.fluid}
+              alt={post.frontmatter.title}
+            />
+          )}
+        </div>
         <section
           dangerouslySetInnerHTML={{ __html: post.html }}
           itemProp="articleBody"
@@ -96,6 +105,13 @@ export const pageQuery = graphql`
         date(formatString: "MMMM DD, YYYY")
         description
         category
+        featuredImage {
+          childImageSharp {
+            fluid(maxWidth: 900) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
       }
     }
     previous: markdownRemark(id: { eq: $previousPostId }) {
