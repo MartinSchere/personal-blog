@@ -43,7 +43,7 @@ const BlogPostTemplate = ({ data, location }) => {
         description={post.frontmatter.description || post.excerpt}
         // socialcard={post.frontmatter.thumbnail.src}
         pathname={location?.pathname}
-        metaImage={post.frontmatter.thumbnail.childImageSharp.resize}
+        metaImage={post.frontmatter.thumbnail?.childImageSharp?.resize}
       />
       <article
         className="blog-post"
