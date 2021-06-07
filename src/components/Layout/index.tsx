@@ -25,7 +25,7 @@ const Layout = ({
   // @ts-ignore: Variable not found
 
   const rootPath = `${__PATH_PREFIX__}/`
-  const isRootPath = location.pathname === rootPath
+  const isRootPath = location?.pathname === rootPath
   let header: React.ReactElement
 
   if (isRootPath) {

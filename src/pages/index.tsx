@@ -4,6 +4,8 @@ import { Link, graphql, PageProps } from "gatsby"
 import "./index.scss"
 import "swiper/swiper.scss"
 
+import Avatar from "../assets/avatar.svg"
+
 import { Swiper, SwiperSlide } from "swiper/react"
 
 import Layout from "../components/Layout"
@@ -38,7 +40,13 @@ const BlogIndex: React.FC<PageProps<DataProps>> = ({ data, location }) => {
   return (
     <Layout location={location} title={siteTitle}>
       <Seo title="All posts" />
-      <Searchbar />
+      <div className="subheader">
+        <Searchbar />
+        <div className="twitter-user">
+          <Avatar />
+          by @scheredev
+        </div>
+      </div>
 
       <h3 className="title">Latest articles</h3>
       {width > 767 ? (
@@ -46,10 +54,6 @@ const BlogIndex: React.FC<PageProps<DataProps>> = ({ data, location }) => {
           {featuredPosts.nodes.map((post, idx) => {
             return (
               <>
-                <FeaturedArticle post={post} key={idx} />
-                <FeaturedArticle post={post} key={idx} />
-                <FeaturedArticle post={post} key={idx} />
-                <FeaturedArticle post={post} key={idx} />
                 <FeaturedArticle post={post} key={idx} />
               </>
             )
@@ -64,17 +68,6 @@ const BlogIndex: React.FC<PageProps<DataProps>> = ({ data, location }) => {
           className="swiper"
           freeMode
         >
-          <SwiperSlide>
-            {featuredPosts.nodes.map((post, idx) => {
-              return <FeaturedArticle post={post} key={idx} />
-            })}
-          </SwiperSlide>
-
-          <SwiperSlide>
-            {featuredPosts.nodes.map((post, idx) => {
-              return <FeaturedArticle post={post} key={idx} />
-            })}
-          </SwiperSlide>
           <SwiperSlide>
             {featuredPosts.nodes.map((post, idx) => {
               return <FeaturedArticle post={post} key={idx} />

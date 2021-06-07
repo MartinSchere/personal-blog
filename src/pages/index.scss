@@ -7,6 +7,21 @@
     margin: 1.75rem 0 1.5rem;
   }
 }
+.subheader {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  .twitter-user {
+    display: flex;
+    font-size: 0.85rem;
+    align-items: center;
+    svg {
+      margin-right: 0.5rem;
+      width: 41px;
+      height: 55px;
+    }
+  }
+}
 .swiper {
   width: 105%;
 }

@@ -120,7 +120,13 @@ module.exports = {
       },
     },
     `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
+    {
+      resolve: `gatsby-plugin-sharp`,
+      options: {
+        icon: `src/assets/avatar.svg`,
+      },
+    },
+
     {
       resolve: `gatsby-plugin-google-gtag`,
       options: {
