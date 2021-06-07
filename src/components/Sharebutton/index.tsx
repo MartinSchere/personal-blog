@@ -14,7 +14,9 @@ type SharebuttonProps = {
 
 const Sharebutton = (props: SharebuttonProps) => {
   const { site } = useStaticQuery(query)
-  const url = site.siteMetadata.siteUrl + location.pathname
+  const url =
+    typeof location !== `undefined` &&
+    site.siteMetadata.siteUrl + location.pathname
 
   const svgMapping = {
     instagram: {
