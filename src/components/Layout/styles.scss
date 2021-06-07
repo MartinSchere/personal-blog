@@ -1,9 +1,19 @@
 .global-header {
   display: flex;
-  justify-content: space-between;
+  position: relative;
+  justify-content: center;
   .main-heading {
     margin-block: 0;
     font-weight: 500;
     padding-top: 0.5rem;
+  }
+  .social-links {
+    position: absolute;
+    left: 0;
+    svg {
+      margin-right: 1.75em;
+      width: 30px;
+      height: 30px;
+    }
   }
 }

@@ -4,7 +4,6 @@ import { Link } from "gatsby"
 import "./styles.scss"
 import Sharebutton from "../Sharebutton"
 import Navbar from "../Navbar"
-import useWindowDimensions from "../../hooks/useWindowDimensions"
 
 type LayoutProps = {
   location: {
@@ -51,17 +50,14 @@ const Layout = ({
 
       {showHeader && (
         <header className="global-header">
-          <Sharebutton location={location} linkTo="twitter" />
+          <div className="social-links">
+            <Sharebutton location={location} linkTo="twitter" />
+            <Sharebutton location={location} linkTo="share" />
+          </div>
           {header}
-          <Sharebutton location={location} linkTo="share" />
         </header>
       )}
       <main>{children}</main>
-      {/* <footer>
-        © {new Date().getFullYear()}, Built with
-        {` `}
-        <a href="https://www.gatsbyjs.com">Gatsby</a>
-      </footer> */}
     </div>
   )
 }

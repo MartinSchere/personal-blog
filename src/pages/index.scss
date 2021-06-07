@@ -1,9 +1,9 @@
 .title {
-  margin: 1.5rem 0 0.5rem;
+  margin: 1.65rem 0 0.75rem;
   font-weight: 900;
 
   @include respond-to("medium") {
-    font-size: 1.35rem;
+    font-size: 1.45rem;
     margin: 1.75rem 0 1.5rem;
   }
 }
@@ -24,7 +24,7 @@
   }
 }
 .searchbar {
-  margin: 0.75rem 0;
+  margin: 2.55rem 0 1.75rem;
 }
 .swiper {
   margin: 1.75rem 0 2rem;
@@ -37,6 +37,7 @@
   @include respond-to("small") {
     grid-template-rows: repeat(2, 1fr);
     column-gap: 3.5em;
+    row-gap: 0;
 
     article:first-child {
       grid-row: 1/3;

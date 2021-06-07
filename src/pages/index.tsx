@@ -40,7 +40,7 @@ const BlogIndex: React.FC<PageProps<DataProps>> = ({ data, location }) => {
       <Seo title="All posts" />
       <Searchbar />
 
-      <h5 className="title">Latest articles</h5>
+      <h3 className="title">Latest articles</h3>
       {width > 767 ? (
         <section className="article-grid">
           {featuredPosts.nodes.map((post, idx) => {
@@ -83,7 +83,7 @@ const BlogIndex: React.FC<PageProps<DataProps>> = ({ data, location }) => {
         </Swiper>
       )}
 
-      <h5 className="title">Topics</h5>
+      <h3 className="title">Topics</h3>
     </Layout>
   )
 }
