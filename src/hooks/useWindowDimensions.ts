@@ -4,7 +4,8 @@ function getWindowDimensions() {
   if (typeof window === undefined) {
     return { width: 0, height: 0 }
   }
-  const { innerWidth: width, innerHeight: height } = window
+  const { innerWidth: width, innerHeight: height } =
+    typeof window !== undefined && window
   return {
     width,
     height,
