@@ -1,0 +1,13 @@
+button {
+  outline: none;
+  background: none;
+  border: none;
+  &.share-card {
+    display: flex;
+    justify-content: center;
+    padding: 0;
+  }
+}
+.share-card:hover {
+  opacity: 0.8;
+}

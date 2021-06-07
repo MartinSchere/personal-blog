@@ -10,8 +10,11 @@
   .social-links {
     position: absolute;
     left: 0;
-    svg {
+    display: flex;
+    .share-card {
       margin-right: 1.75em;
+    }
+    svg {
       width: 30px;
       height: 30px;
     }

@@ -1,6 +1,7 @@
 .title {
   margin: 1.65rem 0 0.75rem;
   font-weight: 900;
+  font-size: 1.35rem;
 
   @include respond-to("medium") {
     font-size: 1.45rem;
@@ -12,13 +13,17 @@
   justify-content: space-between;
   font-weight: bold;
   .twitter-user {
-    display: flex;
+    display: none;
     font-size: 0.85rem;
     align-items: center;
     svg {
       margin-right: 0.5rem;
       width: 41px;
       height: 55px;
+    }
+
+    @include respond-to("small") {
+      display: flex;
     }
   }
 }

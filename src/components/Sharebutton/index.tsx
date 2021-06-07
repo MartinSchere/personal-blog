@@ -10,6 +10,7 @@ import { useStaticQuery, graphql } from "gatsby"
 type SharebuttonProps = {
   linkTo: "instagram" | "facebook" | "twitter" | "share"
   location: { pathname: string }
+  title?: string
 }
 
 const Sharebutton = (props: SharebuttonProps) => {
@@ -30,14 +31,28 @@ const Sharebutton = (props: SharebuttonProps) => {
     },
     share: { svg: <ShareSvg />, href: "" },
   }
-  return (
-    <a
-      className="share-card"
-      href={svgMapping[props.linkTo].href}
-      target="_blank"
-    >
+
+  const shareTo = svgMapping[props.linkTo].href
+
+  const promptShare = async () => {
+    const shareData = {
+      title: props.title || "Article by @scheredev",
+      text: "Check out this cool post by @scheredev",
+      url,
+    }
+    try {
+      await navigator.share(shareData)
+    } catch (err) {}
+  }
+
+  return shareTo ? (
+    <a className="share-card" href={shareTo} target="_blank">
       {svgMapping[props.linkTo].svg}
     </a>
+  ) : (
+    <button onClick={promptShare} className="share-card">
+      {svgMapping[props.linkTo].svg}
+    </button>
   )
 }
 

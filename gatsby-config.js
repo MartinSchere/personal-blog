@@ -6,7 +6,7 @@ module.exports = {
       name: `Martín Schere`,
       summary: `who loves remote work, programming and powerlifting`,
     },
-    description: `My journey tracker: This is where I share information, experiences and a lot more of cool stuff.`,
+    description: `My personal blockchain, web (2.0 & 3.0) development, programming experiences and fintech blog. `,
     siteUrl: `https://schere.dev`,
     social: {
       twitter: `scheredev`,
@@ -19,6 +19,19 @@ module.exports = {
 
     {
       resolve: "gatsby-plugin-robots-txt",
+    },
+    {
+      resolve: "gatsby-plugin-social-cards",
+      options: {
+        // ommit to skip
+        authorImage: "./static/img/avatar.png",
+        // image to use when no cover in frontmatter
+        backgroundImage: "./static/img/social-card.png",
+        // author to use when no auth in frontmatter
+        defaultAuthor: "scheredev",
+        // card design
+        design: "default", // 'default' or 'card'
+      },
     },
     {
       resolve: "gatsby-plugin-sitemap",
@@ -196,13 +209,13 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `The Schere Blog`,
-        short_name: `SchereBlog`,
+        name: `schere.dev`,
+        short_name: `schere.dev`,
         start_url: `/`,
         background_color: `#fffdfd`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        icon: `static/img/avatar.png`, // This path is relative to the root of the site.
       },
     },
     `gatsby-plugin-react-helmet`,

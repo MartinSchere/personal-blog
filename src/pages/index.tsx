@@ -29,6 +29,9 @@ type DataProps = {
       fieldValue: "true" | "false"
     }[]
   }
+  file: {
+    childImageSharp: any
+  }
 }
 
 const BlogIndex: React.FC<PageProps<DataProps>> = ({ data, location }) => {
@@ -39,7 +42,11 @@ const BlogIndex: React.FC<PageProps<DataProps>> = ({ data, location }) => {
   const { width } = useWindowDimensions()
   return (
     <Layout location={location} title={siteTitle}>
-      <Seo title="All posts" />
+      <Seo
+        title="Home"
+        pathname={location?.pathname}
+        metaImage={data.file.childImageSharp.resize}
+      />
       <div className="subheader">
         <Searchbar />
         <div className="twitter-user">
@@ -90,6 +97,18 @@ export const pageQuery = graphql`
         title
       }
     }
+
+    file(absolutePath: { regex: "/social-card/" }) {
+      id
+      childImageSharp {
+        resize(width: 1200) {
+          src
+          height
+          width
+        }
+      }
+    }
+
     allMarkdownRemark {
       group(field: frontmatter___featured) {
         nodes {

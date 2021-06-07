@@ -41,6 +41,9 @@ const BlogPostTemplate = ({ data, location }) => {
       <Seo
         title={post.frontmatter.title}
         description={post.frontmatter.description || post.excerpt}
+        // socialcard={post.frontmatter.thumbnail.src}
+        pathname={location?.pathname}
+        metaImage={post.frontmatter.thumbnail.childImageSharp.resize}
       />
       <article
         className="blog-post"
@@ -138,11 +141,23 @@ export const pageQuery = graphql`
       id
       excerpt(pruneLength: 160)
       html
+      fields {
+        socialcard
+      }
       frontmatter {
         title
         date(formatString: "MMMM DD, YYYY")
         description
         category
+        thumbnail {
+          childImageSharp {
+            resize(width: 1200) {
+              src
+              height
+              width
+            }
+          }
+        }
         featuredImage {
           childImageSharp {
             fluid(maxWidth: 900, quality: 90) {

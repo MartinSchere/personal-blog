@@ -12,9 +12,18 @@ type SEOProps = {
   lang?: string
   meta?: Meta[]
   title?: string
+  metaImage?: any
+  pathname?: string
 }
 
-const Seo = ({ description, lang = "en", meta = [], title }: SEOProps) => {
+const Seo = ({
+  description,
+  lang = "en",
+  meta = [],
+  title,
+  metaImage,
+  pathname,
+}: SEOProps) => {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -22,6 +31,7 @@ const Seo = ({ description, lang = "en", meta = [], title }: SEOProps) => {
           siteMetadata {
             title
             description
+            siteUrl
             social {
               twitter
             }
@@ -33,12 +43,28 @@ const Seo = ({ description, lang = "en", meta = [], title }: SEOProps) => {
 
   const metaDescription = description || site.siteMetadata.description
   const defaultTitle = site.siteMetadata?.title
+  const canonical = pathname ? `${site.siteMetadata.siteUrl}${pathname}` : null
+
+  const image =
+    metaImage && metaImage.src
+      ? `${site.siteMetadata.siteUrl}${metaImage.src}`
+      : null
 
   return (
     <Helmet
       htmlAttributes={{
         lang,
       }}
+      link={
+        canonical
+          ? [
+              {
+                rel: "canonical",
+                href: canonical,
+              },
+            ]
+          : []
+      }
       title={title}
       titleTemplate={defaultTitle ? `%s | ${defaultTitle}` : null}
       meta={[
@@ -59,10 +85,6 @@ const Seo = ({ description, lang = "en", meta = [], title }: SEOProps) => {
           content: `website`,
         },
         {
-          name: `twitter:card`,
-          content: `summary`,
-        },
-        {
           name: `twitter:creator`,
           content: site.siteMetadata?.social?.twitter || ``,
         },
@@ -74,7 +96,35 @@ const Seo = ({ description, lang = "en", meta = [], title }: SEOProps) => {
           name: `twitter:description`,
           content: metaDescription,
         },
-      ].concat(meta)}
+      ]
+        .concat(
+          metaImage
+            ? [
+                {
+                  property: "og:image",
+                  content: image,
+                },
+                {
+                  property: "og:image:width",
+                  content: metaImage.width,
+                },
+                {
+                  property: "og:image:height",
+                  content: metaImage.height,
+                },
+                {
+                  name: "twitter:card",
+                  content: "summary_large_image",
+                },
+              ]
+            : [
+                {
+                  name: "twitter:card",
+                  content: "summary",
+                },
+              ]
+        )
+        .concat(meta)}
     />
   )
 }
