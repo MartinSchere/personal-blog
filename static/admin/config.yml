@@ -37,3 +37,4 @@ collections:
     create: true
     fields:
       - { name: cat_name, label: Name of the category, widget: string }
+      - { name: cat_image, label: Category Image, widget: image }

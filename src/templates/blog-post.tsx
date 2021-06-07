@@ -6,14 +6,38 @@ import Bio from "../components/Bio"
 import "./blog-post.scss"
 import Sharebutton from "../components/Sharebutton"
 import Img from "gatsby-image"
+import useWindowDimensions from "../hooks/useWindowDimensions"
+import { FaArrowLeft } from "react-icons/fa"
+import { useScrollPosition } from "@n8tb1t/use-scroll-position"
 
 const BlogPostTemplate = ({ data, location }) => {
   const post = data.markdownRemark
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const { previous, next } = data
+  const { width, height } = useWindowDimensions()
+
+  const [showNavbar, setShowNavbar] = React.useState(width > 997)
+
+  useScrollPosition(
+    ({ prevPos, currPos }) => {
+      const isVisible =
+        width > 997 ||
+        (currPos.y * -1 > prevPos.y * -1 && currPos.y * -1 > height * 0.75)
+
+      if (showNavbar === isVisible) return
+
+      setShowNavbar(isVisible)
+    },
+    [showNavbar]
+  )
 
   return (
-    <Layout location={location} title={siteTitle}>
+    <Layout
+      location={location}
+      title={siteTitle}
+      showHeader={false}
+      showNavbar={showNavbar}
+    >
       <Seo
         title={post.frontmatter.title}
         description={post.frontmatter.description || post.excerpt}
@@ -23,21 +47,35 @@ const BlogPostTemplate = ({ data, location }) => {
         itemScope
         itemType="http://schema.org/Article"
       >
+        {width < 992 && post.frontmatter.featuredImage && (
+          <div className="top-image-wrapper">
+            <Link to={"/"}>
+              <FaArrowLeft className="back-button" color={"white"} />
+            </Link>
+            <Img
+              className="featured-image"
+              fluid={post.frontmatter.featuredImage.childImageSharp.fluid}
+              alt={post.frontmatter.title}
+            />
+          </div>
+        )}
         <header className="post-header">
           <div className="title-container">
             <small className="category-text">{post.frontmatter.category}</small>
             <h2 itemProp="headline">{post.frontmatter.title}</h2>
           </div>
           <div className="share">
-            <Sharebutton linkTo="twitter" />
-            <Sharebutton linkTo="instagram" />
-            <Sharebutton linkTo="facebook" />
-            <Sharebutton linkTo="share" />
+            <Sharebutton location={location} linkTo="twitter" />
+            <Sharebutton location={location} linkTo="instagram" />
+            <Sharebutton location={location} linkTo="facebook" />
+            <Sharebutton location={location} linkTo="share" />
           </div>
         </header>
         <div className="featured-image-wrapper">
-          {post.frontmatter.featuredImage && (
+          {" "}
+          {post.frontmatter.featuredImage && width > 992 && (
             <Img
+              className="featured-image"
               fluid={post.frontmatter.featuredImage.childImageSharp.fluid}
               alt={post.frontmatter.title}
             />
@@ -107,7 +145,7 @@ export const pageQuery = graphql`
         category
         featuredImage {
           childImageSharp {
-            fluid(maxWidth: 900) {
+            fluid(maxWidth: 900, quality: 90) {
               ...GatsbyImageSharpFluid
             }
           }

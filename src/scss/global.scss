@@ -49,7 +49,10 @@ h5 {
 
 small,
 .text_small {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
+  @include respond-to("medium") {
+    font-size: 0.8rem;
+  }
 }
 
 .category-text {
@@ -79,6 +82,9 @@ a {
   //   padding: 0 5%;
   // }
   @include respond-to("large") {
+    padding: 0 15%;
+  }
+  @include respond-to("x-large") {
     padding: 0 20%;
   }
 }

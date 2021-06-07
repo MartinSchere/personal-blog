@@ -1,4 +1,7 @@
 .post-header {
+  @include respond-to("large") {
+    margin: 2em auto 0 !important;
+  }
   .title-container {
     border-bottom: $border;
     padding: 1rem 0;
@@ -6,11 +9,15 @@
   .share {
     display: flex;
     margin-top: 1rem;
-    div {
+    a {
       margin-right: 0.75rem;
       svg {
-        width: 30px;
-        height: 30px;
+        width: 35px;
+        height: 35px;
+        &:hover {
+          opacity: 0.8;
+          cursor: pointer;
+        }
       }
     }
   }
@@ -18,8 +25,40 @@
 .content,
 .post-header {
   max-width: 650px;
-  @include respond-to("large") {
+  @include respond-to("medium") {
     margin: auto;
+  }
+}
+
+.featured-image {
+  height: 100%;
+}
+.top-image-wrapper {
+  width: 100vw;
+  height: 52.5vh;
+  position: relative;
+  right: 5.75%;
+  margin-bottom: 1.5em;
+
+  .back-button {
+    margin-left: 5%;
+    margin-top: 5%;
+    width: 24px;
+    height: 24px;
+  }
+
+  @include respond-to("x-small") {
+    height: 55vh;
+  }
+  .featured-image {
+    position: absolute !important;
+    width: 100vw;
+    top: 0;
+    z-index: -1;
+  }
+
+  img {
+    opacity: 0.8 !important;
   }
 }
 .featured-image-wrapper {

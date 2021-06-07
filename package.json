@@ -8,6 +8,7 @@
     "url": "https://github.com/gatsbyjs/gatsby/issues"
   },
   "dependencies": {
+    "@n8tb1t/use-scroll-position": "^2.0.3",
     "@types/jest": "^26.0.23",
     "@types/react-helmet": "^6.1.1",
     "@types/react-test-renderer": "^17.0.0",
@@ -37,12 +38,19 @@
     "gatsby-transformer-remark": "^3.2.0",
     "gatsby-transformer-sharp": "^3.4.0",
     "netlify-cms-app": "^2.14.46",
+    "nuka-carousel": "^4.7.8",
     "prismjs": "^1.23.0",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "react-helmet": "^6.1.0",
     "react-icons": "^4.2.0",
-    "sass": "^1.32.12"
+    "react-id-swiper": "^4.0.0",
+    "react-responsive-carousel": "^3.2.18",
+    "react-slick": "^0.28.1",
+    "react-touch-carousel": "^0.9.4",
+    "sass": "^1.32.12",
+    "slick-carousel": "^1.8.1",
+    "swiper": "^6.6.1"
   },
   "devDependencies": {
     "@babel/core": "^7.13.16",

@@ -13,12 +13,12 @@ const FeaturedArticle = ({ post }: FeaturedArticleProps) => {
   const title = post.frontmatter.title || post.fields.slug
   const image = getImage(post.frontmatter.thumbnail)
   return (
-    <Link to={post.fields.slug} itemProp="url">
-      <article
-        className="post-list-item"
-        itemScope
-        itemType="http://schema.org/Article"
-      >
+    <article
+      className="post-list-item"
+      itemScope
+      itemType="http://schema.org/Article"
+    >
+      <Link to={post.fields.slug} itemProp="url">
         <GatsbyImage
           alt={post.frontmatter.title + "image"}
           image={image}
@@ -38,8 +38,8 @@ const FeaturedArticle = ({ post }: FeaturedArticleProps) => {
             itemProp="description"
           />
         </section>
-      </article>
-    </Link>
+      </Link>
+    </article>
   )
 }
 

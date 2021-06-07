@@ -2,14 +2,18 @@ import * as React from "react"
 import { Link, graphql, PageProps } from "gatsby"
 
 import "./index.scss"
+import "swiper/swiper.scss"
 
-import Bio from "../components/Bio"
+import { Swiper, SwiperSlide } from "swiper/react"
+
 import Layout from "../components/Layout"
 import Seo from "../components/Seo"
 
 import { Post } from "../types"
 import Searchbar from "../components/Searchbar"
 import FeaturedArticle from "../components/FeaturedArticle"
+
+import useWindowDimensions from "../hooks/useWindowDimensions"
 
 type DataProps = {
   site: {
@@ -30,17 +34,56 @@ const BlogIndex: React.FC<PageProps<DataProps>> = ({ data, location }) => {
   const featuredPosts = data.allMarkdownRemark.group.find(
     p => p.fieldValue === "true"
   )
+  const { width } = useWindowDimensions()
   return (
     <Layout location={location} title={siteTitle}>
       <Seo title="All posts" />
       <Searchbar />
 
       <h5 className="title">Latest articles</h5>
-      <section className="article-grid">
-        {featuredPosts.nodes.map(post => {
-          return <FeaturedArticle post={post} key={post.id} />
-        })}
-      </section>
+      {width > 767 ? (
+        <section className="article-grid">
+          {featuredPosts.nodes.map((post, idx) => {
+            return (
+              <>
+                <FeaturedArticle post={post} key={idx} />
+                <FeaturedArticle post={post} key={idx} />
+                <FeaturedArticle post={post} key={idx} />
+                <FeaturedArticle post={post} key={idx} />
+                <FeaturedArticle post={post} key={idx} />
+              </>
+            )
+          })}
+        </section>
+      ) : (
+        <Swiper
+          spaceBetween={50}
+          slidesPerView={width < 400 ? 2 : 2.4}
+          onSlideChange={() => console.log("slide change")}
+          onSwiper={swiper => console.log(swiper)}
+          className="swiper"
+          freeMode
+        >
+          <SwiperSlide>
+            {featuredPosts.nodes.map((post, idx) => {
+              return <FeaturedArticle post={post} key={idx} />
+            })}
+          </SwiperSlide>
+
+          <SwiperSlide>
+            {featuredPosts.nodes.map((post, idx) => {
+              return <FeaturedArticle post={post} key={idx} />
+            })}
+          </SwiperSlide>
+          <SwiperSlide>
+            {featuredPosts.nodes.map((post, idx) => {
+              return <FeaturedArticle post={post} key={idx} />
+            })}
+          </SwiperSlide>
+        </Swiper>
+      )}
+
+      <h5 className="title">Topics</h5>
     </Layout>
   )
 }
@@ -67,6 +110,7 @@ export const pageQuery = graphql`
               childImageSharp {
                 gatsbyImageData(
                   width: 300
+                  quality: 90
                   placeholder: BLURRED
                   formats: [AUTO, WEBP, AVIF]
                 )

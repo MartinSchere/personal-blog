@@ -1,6 +1,6 @@
 ---
-thumbnail: logo.png
-featuredImage: vue.png
+thumbnail: marketing.jpg
+featuredImage: marketing.jpg
 featured: true
 date: 2021-05-02T15:42:10.478Z
 title: The rise of Vue.js and its component architecture

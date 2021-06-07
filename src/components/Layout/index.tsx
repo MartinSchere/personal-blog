@@ -3,6 +3,8 @@ import { Link } from "gatsby"
 
 import "./styles.scss"
 import Sharebutton from "../Sharebutton"
+import Navbar from "../Navbar"
+import useWindowDimensions from "../../hooks/useWindowDimensions"
 
 type LayoutProps = {
   location: {
@@ -10,10 +12,19 @@ type LayoutProps = {
   }
   title: string
   children: React.ReactNode
+  showHeader?: boolean
+  showNavbar?: boolean
 }
 
-const Layout = ({ location, title, children }: LayoutProps) => {
+const Layout = ({
+  location,
+  title,
+  children,
+  showHeader = true,
+  showNavbar = false,
+}: LayoutProps) => {
   // @ts-ignore: Variable not found
+
   const rootPath = `${__PATH_PREFIX__}/`
   const isRootPath = location.pathname === rootPath
   let header: React.ReactElement
@@ -36,11 +47,15 @@ const Layout = ({ location, title, children }: LayoutProps) => {
 
   return (
     <div className="container" data-is-root-path={isRootPath}>
-      <header className="global-header">
-        <Sharebutton linkTo="twitter" />
-        {header}
-        <Sharebutton linkTo="share" />
-      </header>
+      {showNavbar && <Navbar className={"active"} title={title} />}
+
+      {showHeader && (
+        <header className="global-header">
+          <Sharebutton location={location} linkTo="twitter" />
+          {header}
+          <Sharebutton location={location} linkTo="share" />
+        </header>
+      )}
       <main>{children}</main>
       {/* <footer>
         © {new Date().getFullYear()}, Built with
