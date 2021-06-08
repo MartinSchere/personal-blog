@@ -1,4 +1,4 @@
 ---
 cat_name: Web development
-cat_image: /assets/pexels-pixabay-270360.jpg
+cat_image: pexels-pixabay-270360.jpg
 ---
