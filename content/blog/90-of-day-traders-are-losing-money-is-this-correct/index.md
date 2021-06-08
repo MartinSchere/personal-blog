@@ -3,10 +3,8 @@ thumbnail: pexels-alesia-kozik-6771178.jpg
 featuredImage: pexels-alesia-kozik-6771178.jpg
 date: 2021-06-08T14:52:03.915Z
 title: "90% of day traders are losing money: Is this correct?"
-description: Lorem Ipsum is simply dummy text of the printing and typesetting
-  industry. Lorem Ipsum has been the industry's standard dummy text ever since
-  the 1500s, when an unknown printer took a galley of type and scrambled it to
-  make a type specimen book.
+description: Many traders think that it's totally sustainable to be doubling
+  their money in less than two hours. But why?
 featured: true
 category: Blockchain
 ---
