@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import "./styles.scss"
+import { Link } from "gatsby"
 
 type NavbarProps = {
   className: string
@@ -16,7 +17,9 @@ const Navbar = (props: NavbarProps) => {
   return (
     <>
       <nav className={active ? "navbar active" : "navbar"}>
-        <h5>{props.title}</h5>
+        <Link to="/">
+          <h5>{props.title}</h5>
+        </Link>
       </nav>
       <div className="navbar-replacement"></div>
     </>

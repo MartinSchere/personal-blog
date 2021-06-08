@@ -2,13 +2,14 @@ import React from "react"
 import "./styles.scss"
 
 import FacebookSvg from "../../assets/facebook-card.svg"
-import InstagramSvg from "../../assets/instagram-card.svg"
+import LinkedinSvg from "../../assets/linkedin-card.svg"
 import TwitterSvg from "../../assets/twitter-card.svg"
 import ShareSvg from "../../assets/share-card.svg"
+import RedditSvg from "../../assets/reddit-card.svg"
 import { useStaticQuery, graphql } from "gatsby"
 
 type SharebuttonProps = {
-  linkTo: "instagram" | "facebook" | "twitter" | "share"
+  linkTo: "linkedin" | "reddit" | "facebook" | "twitter" | "share"
   location: { pathname: string }
   title?: string
 }
@@ -20,16 +21,26 @@ const Sharebutton = (props: SharebuttonProps) => {
     site.siteMetadata.siteUrl + location.pathname
 
   const svgMapping = {
-    instagram: {
-      svg: <InstagramSvg />,
-      href: `https://www.instagram.com/?url=${url}`,
+    linkedin: {
+      svg: <LinkedinSvg />,
+      href: `https://www.linkedin.com/sharing/share-offsite/?url=${url}`,
     },
-    facebook: { svg: <FacebookSvg />, href: "" },
+    reddit: {
+      svg: <RedditSvg />,
+      href: `https://www.reddit.com/submit?url=${url}`,
+    },
+    facebook: {
+      svg: <FacebookSvg />,
+      href: `https://www.facebook.com/sharer/sharer.php?u=${url}`,
+    },
     twitter: {
       svg: <TwitterSvg />,
       href: `https://twitter.com/intent/tweet?url=${url}`,
     },
-    share: { svg: <ShareSvg />, href: "" },
+    share: {
+      svg: <ShareSvg />,
+      href: "",
+    },
   }
 
   const shareTo = svgMapping[props.linkTo].href

@@ -69,7 +69,8 @@ const BlogPostTemplate = ({ data, location }) => {
           </div>
           <div className="share">
             <Sharebutton location={location} linkTo="twitter" />
-            <Sharebutton location={location} linkTo="instagram" />
+            <Sharebutton location={location} linkTo="linkedin" />
+            <Sharebutton location={location} linkTo="reddit" />
             <Sharebutton location={location} linkTo="facebook" />
             <Sharebutton location={location} linkTo="share" />
           </div>

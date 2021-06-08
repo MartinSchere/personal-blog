@@ -9,10 +9,16 @@
   }
   .social-links {
     position: absolute;
+    width: 100%;
     left: 0;
     display: flex;
-    .share-card {
-      margin-right: 1.75em;
+    justify-content: space-between;
+
+    @include respond-to("medium") {
+      justify-content: flex-start;
+      .share-card {
+        margin-right: 1.75em;
+      }
     }
     svg {
       width: 30px;
