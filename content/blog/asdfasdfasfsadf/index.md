@@ -3,7 +3,8 @@ thumbnail: pexels-david-mcbee-730547.jpg
 featuredImage: pexels-david-mcbee-730547.jpg
 date: 2021-06-08T14:34:57.711Z
 title: Is bitcoin going to be banned?
-description: safasdfasdfsadf
+description: "**Lorem Ipsum** is simply dummy text of the printing and
+  typesetting industry. "
 featured: true
 category: Blockchain
 ---
