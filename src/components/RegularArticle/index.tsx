@@ -15,7 +15,7 @@ const RegularArticle = ({ post }: RegularArticleProps) => {
 
   return (
     <article
-      className="post-list-item"
+      className="regular-article"
       itemScope
       itemType="http://schema.org/Article"
     >
@@ -23,22 +23,24 @@ const RegularArticle = ({ post }: RegularArticleProps) => {
         <GatsbyImage
           alt={post.frontmatter.title + "image"}
           image={image}
-          className="article-image"
+          className="regular-article-image"
         />
-        <header>
-          <small className="category-text">{post.frontmatter.category}</small>
-          <h4 className="article-title">
-            <span itemProp="headline">{title}</span>
-          </h4>
-        </header>
-        <section className="article-excerpt">
-          <p
-            dangerouslySetInnerHTML={{
-              __html: post.frontmatter.description || post.excerpt,
-            }}
-            itemProp="description"
-          />
-        </section>
+        <div className="article-body">
+          <header>
+            <small className="category-text">{post.frontmatter.category}</small>
+            <h4 className="regular-article-title">
+              <span itemProp="headline">{title}</span>
+            </h4>
+          </header>
+          <section className="article-excerpt">
+            <p
+              dangerouslySetInnerHTML={{
+                __html: post.frontmatter.description || post.excerpt,
+              }}
+              itemProp="description"
+            />
+          </section>
+        </div>
       </Link>
     </article>
   )

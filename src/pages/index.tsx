@@ -87,17 +87,18 @@ const BlogIndex: React.FC<PageProps<DataProps>> = ({ data, location }) => {
           })}
         </Swiper>
       )}
+      <section className="topic-section">
+        <h3 className="title">Topics</h3>
+        <TopicList />
+      </section>
 
-      <h3 className="title">Topics</h3>
-
-      <TopicList />
-
-      <h3 className="title">More to read</h3>
-
-      {regularPosts &&
-        regularPosts.nodes.map((post, idx) => (
-          <RegularArticle post={post} key={idx} />
-        ))}
+      <section className="more-posts">
+        <h3 className="title">More to read</h3>
+        {regularPosts &&
+          regularPosts.nodes.map((post, idx) => (
+            <RegularArticle post={post} key={idx} />
+          ))}
+      </section>
     </Layout>
   )
 }
@@ -123,7 +124,7 @@ export const pageQuery = graphql`
       }
     }
 
-    allMarkdownRemark {
+    allMarkdownRemark(limit: 10) {
       group(field: frontmatter___featured) {
         nodes {
           frontmatter {

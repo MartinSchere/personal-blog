@@ -1,0 +1,46 @@
+.regular-article {
+  padding: 1rem 0;
+  a {
+    display: flex;
+    width: 100%;
+    .article-body {
+      margin-left: 1.5rem;
+      header {
+        display: flex;
+        flex-direction: column;
+        small {
+          order: 2;
+          margin-bottom: 1rem;
+        }
+        @include respond-to("small") {
+          display: block;
+        }
+      }
+    }
+    .regular-article-image {
+      border-radius: 5px;
+      width: 90px;
+      height: 70px;
+
+      @include respond-to("medium") {
+        width: unset;
+        max-width: 270px;
+        height: 150px;
+      }
+    }
+    .regular-article-title {
+      font-size: 1.05rem;
+
+      @include respond-to("small") {
+        font-size: 1.25rem;
+      }
+    }
+    p {
+      max-width: 450px;
+      display: none;
+      @include respond-to("small") {
+        display: block;
+      }
+    }
+  }
+}
