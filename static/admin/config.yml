@@ -9,6 +9,8 @@ public_folder: /assets
 collections:
   - name: blog
     label: Blog
+    editor:
+      preview: false
     folder: content/blog
     slug: "index"
     media_folder: ""
@@ -21,6 +23,7 @@ collections:
       - { name: date, label: Date, widget: datetime }
       - { name: title, label: Title }
       - { name: description, label: Description }
+      - { name: featured, label: Featured, widget: boolean }
       - {
           name: category,
           label: Category,
@@ -33,6 +36,8 @@ collections:
 
   - name: categories
     label: Categories
+    editor:
+      preview: false
     folder: content/categories
     create: true
     fields:
