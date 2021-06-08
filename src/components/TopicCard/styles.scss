@@ -1,0 +1,29 @@
+.image-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 2.5rem;
+  justify-content: center;
+
+  min-width: 150px;
+  word-break: keep-all;
+
+  @include respond-to("large") {
+    width: 235px;
+  }
+
+  .topic-name {
+    color: white;
+    z-index: 3;
+    padding: 0 1rem;
+    font-weight: 400;
+    font-size: 1.15rem;
+  }
+  .topic-image {
+    width: 100%;
+    position: absolute;
+    opacity: 0.9;
+    height: 2.5rem;
+    border-radius: 5px;
+  }
+}

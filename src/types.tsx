@@ -29,3 +29,9 @@ export type Post = {
   }
   id: string
 }
+export type Cateogry = {
+  frontmatter: {
+    cat_name: string
+    cat_image: any
+  }
+}

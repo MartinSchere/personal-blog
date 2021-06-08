@@ -16,6 +16,8 @@ import Searchbar from "../components/Searchbar"
 import FeaturedArticle from "../components/FeaturedArticle"
 
 import useWindowDimensions from "../hooks/useWindowDimensions"
+import TopicList from "../components/TopicList"
+import RegularArticle from "../components/RegularArticle"
 
 type DataProps = {
   site: {
@@ -38,6 +40,9 @@ const BlogIndex: React.FC<PageProps<DataProps>> = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const featuredPosts = data.allMarkdownRemark.group.find(
     p => p.fieldValue === "true"
+  )
+  const regularPosts = data.allMarkdownRemark.group.find(
+    p => p.fieldValue === "false"
   )
   const { width } = useWindowDimensions()
   return (
@@ -69,21 +74,30 @@ const BlogIndex: React.FC<PageProps<DataProps>> = ({ data, location }) => {
       ) : (
         <Swiper
           spaceBetween={50}
-          slidesPerView={width < 400 ? 2 : 2.4}
-          onSlideChange={() => console.log("slide change")}
-          onSwiper={swiper => console.log(swiper)}
+          slidesPerView={width / 200}
           className="swiper"
           freeMode
         >
-          <SwiperSlide>
-            {featuredPosts.nodes.map((post, idx) => {
-              return <FeaturedArticle post={post} key={idx} />
-            })}
-          </SwiperSlide>
+          {featuredPosts.nodes.map((post, idx) => {
+            return (
+              <SwiperSlide key={idx}>
+                <FeaturedArticle post={post} />
+              </SwiperSlide>
+            )
+          })}
         </Swiper>
       )}
 
       <h3 className="title">Topics</h3>
+
+      <TopicList />
+
+      <h3 className="title">More to read</h3>
+
+      {regularPosts &&
+        regularPosts.nodes.map((post, idx) => (
+          <RegularArticle post={post} key={idx} />
+        ))}
     </Layout>
   )
 }

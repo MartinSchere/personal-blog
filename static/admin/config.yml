@@ -39,6 +39,8 @@ collections:
     editor:
       preview: false
     folder: content/categories
+    media_folder: ""
+    public_folder: ""
     create: true
     fields:
       - { name: cat_name, label: Name of the category, widget: string }
