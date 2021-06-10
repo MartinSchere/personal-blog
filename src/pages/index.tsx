@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Link, graphql, PageProps } from "gatsby"
+import { Link, graphql, PageProps, navigate } from "gatsby"
 
 import "./index.scss"
 import "swiper/swiper.scss"
@@ -38,6 +38,7 @@ type DataProps = {
 
 const BlogIndex: React.FC<PageProps<DataProps>> = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
+  const [searchValue, setSearchValue] = React.useState("")
   const featuredPosts = data.allMarkdownRemark.group.find(
     p => p.fieldValue === "true"
   )
@@ -53,7 +54,15 @@ const BlogIndex: React.FC<PageProps<DataProps>> = ({ data, location }) => {
         metaImage={data.file.childImageSharp.resize}
       />
       <div className="subheader">
-        <Searchbar />
+        <form action="/search/" className="searchbar-wrapper">
+          <Searchbar
+            showButton
+            value={searchValue}
+            onChange={val => {
+              setSearchValue(val)
+            }}
+          />
+        </form>
         <div className="twitter-user">
           <Avatar />
           by @scheredev
@@ -64,11 +73,7 @@ const BlogIndex: React.FC<PageProps<DataProps>> = ({ data, location }) => {
       {width > 767 ? (
         <section className="article-grid">
           {featuredPosts.nodes.map((post, idx) => {
-            return (
-              <>
-                <FeaturedArticle post={post} key={idx} />
-              </>
-            )
+            return <FeaturedArticle post={post} key={idx} />
           })}
         </section>
       ) : (
@@ -96,7 +101,12 @@ const BlogIndex: React.FC<PageProps<DataProps>> = ({ data, location }) => {
         <h3 className="title">More to read</h3>
         {regularPosts &&
           regularPosts.nodes.map((post, idx) => (
-            <RegularArticle post={post} key={idx} />
+            <RegularArticle
+              frontmatter={post.frontmatter}
+              slug={post.fields.slug}
+              excerpt={post.excerpt}
+              key={idx}
+            />
           ))}
       </section>
     </Layout>

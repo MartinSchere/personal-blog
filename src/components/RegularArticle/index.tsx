@@ -4,14 +4,30 @@ import { Link } from "gatsby"
 
 import { Post } from "../../types"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import { Highlight, Snippet } from "react-instantsearch-dom"
 
 type RegularArticleProps = {
-  post: Post
+  frontmatter:
+    | Post["frontmatter"]
+    | {
+        category: string
+        thumbnail: any
+        title: typeof Highlight
+        excerpt: typeof Snippet
+      }
+  slug: string
+  excerpt: string
 }
 
-const RegularArticle = ({ post }: RegularArticleProps) => {
-  const title = post.frontmatter.title || post.fields.slug
-  const image = getImage(post.frontmatter.thumbnail)
+const RegularArticle = ({
+  frontmatter,
+  slug,
+  excerpt,
+}: RegularArticleProps) => {
+  const image = getImage(frontmatter.thumbnail)
+  const descriptionOrExcerpt =
+    // @ts-ignore
+    frontmatter.description || frontmatter.excerpt || excerpt
 
   return (
     <article
@@ -19,26 +35,21 @@ const RegularArticle = ({ post }: RegularArticleProps) => {
       itemScope
       itemType="http://schema.org/Article"
     >
-      <Link to={post.fields.slug} itemProp="url">
+      <Link to={slug} itemProp="url">
         <GatsbyImage
-          alt={post.frontmatter.title + "image"}
+          alt={"article image"}
           image={image}
-          className="regular-article-image"
+          className="regular-article-image-wrapper"
         />
         <div className="article-body">
           <header>
-            <small className="category-text">{post.frontmatter.category}</small>
+            <small className="category-text">{frontmatter.category}</small>
             <h4 className="regular-article-title">
-              <span itemProp="headline">{title}</span>
+              <span itemProp="headline">{frontmatter.title}</span>
             </h4>
           </header>
           <section className="article-excerpt">
-            <p
-              dangerouslySetInnerHTML={{
-                __html: post.frontmatter.description || post.excerpt,
-              }}
-              itemProp="description"
-            />
+            <p itemProp="description">{descriptionOrExcerpt}</p>
           </section>
         </div>
       </Link>

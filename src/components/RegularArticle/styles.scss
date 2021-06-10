@@ -17,13 +17,12 @@
         }
       }
     }
-    .regular-article-image {
+    .regular-article-image-wrapper {
       border-radius: 5px;
-      width: 90px;
+      max-width: 90px;
       height: 70px;
 
       @include respond-to("medium") {
-        width: unset;
         max-width: 270px;
         height: 150px;
       }

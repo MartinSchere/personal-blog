@@ -1,4 +1,11 @@
 const siteUrl = `https://schere.dev`
+
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+console.log(process.env.NODE_ENV)
+console.log(process.env)
+
 module.exports = {
   siteMetadata: {
     title: `schere.dev`,
@@ -19,19 +26,6 @@ module.exports = {
 
     {
       resolve: "gatsby-plugin-robots-txt",
-    },
-    {
-      resolve: "gatsby-plugin-social-cards",
-      options: {
-        // ommit to skip
-        authorImage: "./static/img/avatar.png",
-        // image to use when no cover in frontmatter
-        backgroundImage: "./static/img/social-card.png",
-        // author to use when no auth in frontmatter
-        defaultAuthor: "scheredev",
-        // card design
-        design: "default", // 'default' or 'card'
-      },
     },
     {
       resolve: "gatsby-plugin-sitemap",
@@ -221,5 +215,14 @@ module.exports = {
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-gatsby-cloud`,
     `gatsby-plugin-offline`,
+
+    {
+      resolve: `gatsby-plugin-algolia`,
+      options: {
+        appId: process.env.GATSBY_ALGOLIA_APP_ID,
+        apiKey: process.env.ALGOLIA_API_KEY,
+        queries: require("./src/utils/algolia-query"),
+      },
+    },
   ],
 }

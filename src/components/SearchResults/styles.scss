@@ -1,0 +1,38 @@
+.no-results {
+  height: 60vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+
+  h4 {
+    font-weight: 500;
+    font-size: 1.25rem;
+  }
+
+  svg {
+    width: 5rem;
+    height: 5rem;
+    margin-bottom: 1rem;
+    animation: levitate 5s ease 0.5s infinite alternate;
+
+    @include respond-to("medium") {
+      width: 7.5rem;
+      height: 7.5rem;
+    }
+  }
+}
+@keyframes levitate {
+  0% {
+    transform: translateY(0%);
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: translateY(-6%);
+    transform: rotate(-6deg);
+  }
+  100% {
+    transform: translateY(0%);
+    transform: rotate(0deg);
+  }
+}

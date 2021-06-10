@@ -142,9 +142,7 @@ export const pageQuery = graphql`
       id
       excerpt(pruneLength: 160)
       html
-      fields {
-        socialcard
-      }
+
       frontmatter {
         title
         date(formatString: "MMMM DD, YYYY")

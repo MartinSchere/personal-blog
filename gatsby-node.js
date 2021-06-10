@@ -14,11 +14,13 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         allMarkdownRemark(
           sort: { fields: [frontmatter___date], order: ASC }
           limit: 1000
+          filter: { fields: { type: { eq: "post" } } }
         ) {
           nodes {
             id
             fields {
               slug
+              type
             }
           }
         }
@@ -63,11 +65,17 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
 
   if (node.internal.type === `MarkdownRemark`) {
     const value = createFilePath({ node, getNode })
+    const nodePathList = node.fileAbsolutePath.split("/")
 
     createNodeField({
       name: `slug`,
       node,
       value,
+    })
+    createNodeField({
+      name: "type",
+      node,
+      value: nodePathList.includes("categories") ? "category" : "post",
     })
   }
 }
