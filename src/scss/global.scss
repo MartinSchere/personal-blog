@@ -76,7 +76,11 @@ a {
   color: $text-normal;
 }
 
-.container {
+main {
+  min-height: 75vh;
+}
+.container,
+footer {
   padding: 0 5%;
   // @include respond-to("small") {
   //   padding: 0 2.5%;

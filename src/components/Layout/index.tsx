@@ -4,6 +4,7 @@ import { Link } from "gatsby"
 import "./styles.scss"
 import Sharebutton from "../Sharebutton"
 import Navbar from "../Navbar"
+import Footer from "../Footer"
 
 type LayoutProps = {
   location: {
@@ -45,20 +46,23 @@ const Layout = ({
   }
 
   return (
-    <div className="container" data-is-root-path={isRootPath}>
-      {showNavbar && <Navbar className={"active"} title={title} />}
+    <>
+      <div className="container" data-is-root-path={isRootPath}>
+        {showNavbar && <Navbar className={"active"} title={title} />}
 
-      {showHeader && (
-        <header className="global-header">
-          <div className="social-links">
-            <Sharebutton location={location} linkTo="twitter" />
-            <Sharebutton location={location} linkTo="share" />
-          </div>
-          {header}
-        </header>
-      )}
-      <main>{children}</main>
-    </div>
+        {showHeader && (
+          <header className="global-header">
+            <div className="social-links">
+              <Sharebutton location={location} linkTo="twitter" />
+              <Sharebutton location={location} linkTo="share" />
+            </div>
+            {header}
+          </header>
+        )}
+        <main>{children}</main>
+      </div>
+      <Footer />
+    </>
   )
 }
 

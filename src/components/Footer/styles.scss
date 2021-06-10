@@ -1,0 +1,34 @@
+footer {
+  background-color: $lightergray;
+  padding-bottom: 10vh;
+  h3 {
+    font-weight: 500;
+    padding: 3rem 0;
+    text-align: center;
+  }
+  form {
+    display: grid;
+    max-width: 500px;
+    margin: auto;
+    row-gap: 1em;
+    grid-template-columns: 5fr 1fr;
+    grid-template-rows: 1fr 2fr;
+
+    input {
+      font-size: 1.15rem;
+      padding: 0.5rem 1rem;
+      margin-right: 0.5rem;
+      outline: none;
+      border: none;
+      border-radius: 2.5px;
+    }
+    button {
+      background-color: white;
+      border-radius: 2.5px;
+    }
+    .lead {
+      font-size: 0.95rem;
+      grid-column: 1/7;
+    }
+  }
+}

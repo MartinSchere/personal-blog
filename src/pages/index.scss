@@ -16,6 +16,10 @@
     display: none;
     font-size: 0.85rem;
     align-items: center;
+    a {
+      margin-left: 0.25rem;
+      text-decoration: underline;
+    }
     svg {
       margin-right: 0.5rem;
       width: 41px;

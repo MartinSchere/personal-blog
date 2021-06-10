@@ -65,7 +65,8 @@ const BlogIndex: React.FC<PageProps<DataProps>> = ({ data, location }) => {
         </form>
         <div className="twitter-user">
           <Avatar />
-          by @scheredev
+          by
+          <a href="https://twitter.com/scheredev"> @scheredev</a>
         </div>
       </div>
 
